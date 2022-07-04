@@ -1,0 +1,26 @@
+{
+  "name": "loa-details-log-parser",
+  "version": "1.0.6",
+  "description": "Log parser made for LOA Details",
+  "exports": {
+    ".": "./dist/parser.js",
+    "./worker": "./dist/file-parser-worker.js"
+  },
+  "types": "dist/index.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.module.js",
+  "unpkg": "./dist/index.umd.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "microbundle watch",
+    "build": "microbundle src/*.ts"
+  },
+  "devDependencies": {
+    "microbundle": "^0.15.0"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.3",
+    "lodash": "^4.17.21",
+    "uuid": "^8.3.2"
+  }
+}
