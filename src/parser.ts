@@ -498,6 +498,9 @@ export class LogParser {
     // TODO: Not sure if this is fixed in the logger
     if (logLine.skillName === "Bleed" && logLine.damage > 10000000) return;
 
+    // Remove 'sync' bleeds on G1 Valtan
+    if (logLine.skillName === "Bleed" && logLine.damageModifier === 11) return;
+
     const critCount = logLine.isCrit ? 1 : 0;
     const backAttackCount = logLine.isBackAttack ? 1 : 0;
     const frontAttackCount = logLine.isFrontAttack ? 1 : 0;

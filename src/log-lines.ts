@@ -149,7 +149,7 @@ export class LogDamage extends LogLine {
   targetId: string;
   targetName: string;
   damage: number;
-  damageModifier: boolean;
+  damageModifier: number;
   isCrit: boolean;
   isBackAttack: boolean;
   isFrontAttack: boolean;
@@ -168,7 +168,7 @@ export class LogDamage extends LogLine {
     this.targetId = lineSplit[8];
     this.targetName = lineSplit[9] || "Unknown Entity";
     this.damage = tryParseInt(lineSplit[10]);
-    this.damageModifier = lineSplit[11] == "1";
+    this.damageModifier = tryParseInt(lineSplit[11], 0, 16);
     this.isCrit = lineSplit[12] == "1";
     this.isBackAttack = lineSplit[13] == "1";
     this.isFrontAttack = lineSplit[14] == "1";
