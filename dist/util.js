@@ -1,2 +1,2 @@
-exports.tryParseInt=function(r,t,e){if(void 0===t&&(t=0),void 0===e&&(e=10),"number"==typeof r)return isNaN(r)?t:r;var n;try{n=parseInt(r,e),isNaN(n)&&(n=t)}catch(r){n=t}return n};
+exports.tryParseInt=function(r,t){if(void 0===t&&(t=0),"number"==typeof r)return isNaN(r)?t:r;var e;try{e=parseInt(r),isNaN(e)&&(e=t)}catch(r){e=t}return e};
 //# sourceMappingURL=util.js.map

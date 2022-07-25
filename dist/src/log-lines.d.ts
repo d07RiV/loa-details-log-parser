@@ -64,7 +64,7 @@ export declare class LogDamage extends LogLine {
     targetId: string;
     targetName: string;
     damage: number;
-    damageModifier: number;
+    damageModifier: boolean;
     isCrit: boolean;
     isBackAttack: boolean;
     isFrontAttack: boolean;
