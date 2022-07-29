@@ -501,9 +501,15 @@ export class LogParser {
     // Remove 'sync' bleeds on G1 Valtan
     if (logLine.skillName === "Bleed" && logLine.damageModifier === 11) return;
 
-    const critCount = logLine.isCrit ? 1 : 0;
-    const backAttackCount = logLine.isBackAttack ? 1 : 0;
-    const frontAttackCount = logLine.isFrontAttack ? 1 : 0;
+    const { damageModifier } = logLine;
+
+    const isCrit = (damageModifier & (LogLines.HitFlag.HIT_FLAG_CRITICAL | LogLines.HitFlag.HIT_FLAG_DOT_CRITICAL)) > 0;
+    const isBackAttack = (damageModifier & LogLines.HitFlag.HIT_OPTION_BACK_ATTACK) > 0;
+    const isFrontAttack = (damageModifier & LogLines.HitFlag.HIT_OPTION_FRONTAL_ATTACK) > 0;
+
+    const critCount = isCrit ? 1 : 0;
+    const backAttackCount = isBackAttack ? 1 : 0;
+    const frontAttackCount = isFrontAttack ? 1 : 0;
 
     this.game.entities[logLine.name].skills[logLine.skillName].totalDamage +=
       logLine.damage;
