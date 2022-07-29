@@ -448,7 +448,7 @@ export class LogParser {
 
   // logId = 8
   onDamage(lineSplit: string[]) {
-    if (lineSplit.length < 16) return;
+    if (lineSplit.length < 13) return;
     const logLine = new LogLines.LogDamage(lineSplit);
 
     if (this.debugLines) {

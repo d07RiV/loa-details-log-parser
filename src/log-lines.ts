@@ -150,9 +150,6 @@ export class LogDamage extends LogLine {
   targetName: string;
   damage: number;
   damageModifier: number;
-  isCrit: boolean;
-  isBackAttack: boolean;
-  isFrontAttack: boolean;
   currentHp: number;
   maxHp: number;
 
