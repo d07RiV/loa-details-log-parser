@@ -169,11 +169,8 @@ export class LogDamage extends LogLine {
     this.targetName = lineSplit[9] || "Unknown Entity";
     this.damage = tryParseInt(lineSplit[10]);
     this.damageModifier = tryParseInt(lineSplit[11], 0, 16);
-    this.isCrit = lineSplit[12] == "1";
-    this.isBackAttack = lineSplit[13] == "1";
-    this.isFrontAttack = lineSplit[14] == "1";
-    this.currentHp = tryParseInt(lineSplit[15]);
-    this.maxHp = tryParseInt(lineSplit[16]);
+    this.currentHp = tryParseInt(lineSplit[12]);
+    this.maxHp = tryParseInt(lineSplit[13]);
   }
 }
 
