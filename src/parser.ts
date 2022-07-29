@@ -3,7 +3,7 @@ import EventEmitter from "events";
 
 import * as LogLines from "./log-lines.js";
 import { tryParseInt } from "./util.js";
-import { healingSkills } from "./constants.js";
+import { healingSkills, HitFlag } from "./constants.js";
 
 interface Game {
   startedOn: number;
@@ -501,11 +501,14 @@ export class LogParser {
     // Remove 'sync' bleeds on G1 Valtan
     if (logLine.skillName === "Bleed" && logLine.damageModifier === 11) return;
 
-    const { damageModifier } = logLine;
-
-    const isCrit = (damageModifier & (LogLines.HitFlag.HIT_FLAG_CRITICAL | LogLines.HitFlag.HIT_FLAG_DOT_CRITICAL)) > 0;
-    const isBackAttack = (damageModifier & LogLines.HitFlag.HIT_OPTION_BACK_ATTACK) > 0;
-    const isFrontAttack = (damageModifier & LogLines.HitFlag.HIT_OPTION_FRONTAL_ATTACK) > 0;
+    const isCrit =
+      (logLine.damageModifier &
+        (HitFlag.HIT_FLAG_CRITICAL | HitFlag.HIT_FLAG_DOT_CRITICAL)) >
+      0;
+    const isBackAttack =
+      (logLine.damageModifier & HitFlag.HIT_OPTION_BACK_ATTACK) > 0;
+    const isFrontAttack =
+      (logLine.damageModifier & HitFlag.HIT_OPTION_FRONTAL_ATTACK) > 0;
 
     const critCount = isCrit ? 1 : 0;
     const backAttackCount = isBackAttack ? 1 : 0;
