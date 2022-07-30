@@ -3,7 +3,7 @@ import EventEmitter from "events";
 
 import * as LogLines from "./log-lines.js";
 import { tryParseInt } from "./util.js";
-import { healingSkills, HitFlag } from "./constants.js";
+import { healingSkills, HitFlag, HitOption } from "./constants.js";
 
 interface Game {
   startedOn: number;
@@ -495,20 +495,20 @@ export class LogParser {
       };
     }
 
+    const hitFlag: HitFlag = logLine.damageModifier & 0xf;
+    const hitOption: HitOption = ((logLine.damageModifier >> 4) & 0x7) - 1;
+
     // TODO: Not sure if this is fixed in the logger
     if (logLine.skillName === "Bleed" && logLine.damage > 10000000) return;
 
     // Remove 'sync' bleeds on G1 Valtan
-    if (logLine.skillName === "Bleed" && logLine.damageModifier === 11) return;
+    if (logLine.skillName === "Bleed" && hitFlag === HitFlag.HIT_FLAG_DAMAGE_SHARE) return;
 
     const isCrit =
-      (logLine.damageModifier &
-        (HitFlag.HIT_FLAG_CRITICAL | HitFlag.HIT_FLAG_DOT_CRITICAL)) >
-      0;
-    const isBackAttack =
-      (logLine.damageModifier & HitFlag.HIT_OPTION_BACK_ATTACK) > 0;
-    const isFrontAttack =
-      (logLine.damageModifier & HitFlag.HIT_OPTION_FRONTAL_ATTACK) > 0;
+      hitFlag === HitFlag.HIT_FLAG_CRITICAL ||
+      hitFlag === HitFlag.HIT_FLAG_DOT_CRITICAL;
+    const isBackAttack = hitOption === HitOption.HIT_OPTION_BACK_ATTACK;
+    const isFrontAttack = hitOption === HitOption.HIT_OPTION_FRONTAL_ATTACK;
 
     const critCount = isCrit ? 1 : 0;
     const backAttackCount = isBackAttack ? 1 : 0;
