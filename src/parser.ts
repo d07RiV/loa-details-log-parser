@@ -19,6 +19,8 @@ interface Game {
     topHealingDone: number;
     totalShieldDone: number;
     topShieldDone: number;
+    targetMaximumHealth: number;
+    targetCurrentHealth: number;
   };
 }
 interface HealSource {
@@ -163,7 +165,9 @@ export class LogParser {
         totalHealingDone: 0,
         topHealingDone: 0,
         totalShieldDone: 0,
-        topShieldDone: 0
+        topShieldDone: 0,
+        targetMaximumHealth: 0,
+        targetCurrentHealth: 0,
       }
     };
 
@@ -551,6 +555,8 @@ export class LogParser {
         this.game.damageStatistics.topDamageDealt,
         damageOwner.damageDealt
       );
+      this.game.damageStatistics.targetMaximumHealth = logLine.maxHp;
+      this.game.damageStatistics.targetCurrentHealth = logLine.currentHp;
     }
 
     if (damageTarget.isPlayer) {

@@ -17,6 +17,8 @@ interface Game {
         topHealingDone: number;
         totalShieldDone: number;
         topShieldDone: number;
+        targetMaximumHealth: number;
+        targetCurrentHealth: number;
     };
 }
 interface HealSource {
