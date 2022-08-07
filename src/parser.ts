@@ -490,6 +490,11 @@ export class LogParser {
       logLine.damage = logLine.damage + logLine.currentHp;
     }
 
+    if (logLine.skillId === 0 && logLine.skillEffectId !== 0) {
+        logLine.skillId = logLine.skillEffectId;
+        logLine.skillName = logLine.skillEffect;
+    }
+
     if (!(logLine.skillName in this.game.entities[logLine.name].skills)) {
       this.game.entities[logLine.name].skills[logLine.skillName] = {
         ...createEntitySkill(),
