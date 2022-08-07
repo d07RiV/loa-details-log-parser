@@ -45,6 +45,7 @@ interface Entity {
   hits: Hits;
 }
 interface EntitySkills {
+  id: number;
   name: string;
   totalDamage: number;
   maxDamage: number;
@@ -52,6 +53,7 @@ interface EntitySkills {
 }
 function createEntitySkill(): EntitySkills {
   const newEntitySkill: EntitySkills = {
+    id: 0,
     name: "",
     totalDamage: 0,
     maxDamage: 0,
@@ -491,7 +493,7 @@ export class LogParser {
     if (!(logLine.skillName in this.game.entities[logLine.name].skills)) {
       this.game.entities[logLine.name].skills[logLine.skillName] = {
         ...createEntitySkill(),
-        ...{ name: logLine.skillName }
+        ...{ id: logLine.skillId, name: logLine.skillName }
       };
     }
 
