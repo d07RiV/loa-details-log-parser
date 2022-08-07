@@ -252,7 +252,7 @@ export class LogParser {
         case 10:
           this.onBuff(lineSplit);
           break;
-        case 11:
+        case 12:
           this.onCounterattack(lineSplit);
           break;
       }
@@ -629,7 +629,7 @@ export class LogParser {
     }
   }
 
-  // logId = 11
+  // logId = 12
   onCounterattack(lineSplit: string[]) {
     const logLine = new LogLines.LogCounterattack(lineSplit);
 
