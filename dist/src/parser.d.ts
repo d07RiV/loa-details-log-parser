@@ -44,6 +44,7 @@ interface Entity {
     hits: Hits;
 }
 interface EntitySkills {
+    id: number;
     name: string;
     totalDamage: number;
     maxDamage: number;

@@ -45,6 +45,7 @@ interface Entity {
   hits: Hits;
 }
 interface EntitySkills {
+  id: number;
   name: string;
   totalDamage: number;
   maxDamage: number;
@@ -52,6 +53,7 @@ interface EntitySkills {
 }
 function createEntitySkill(): EntitySkills {
   const newEntitySkill: EntitySkills = {
+    id: 0,
     name: "",
     totalDamage: 0,
     maxDamage: 0,
@@ -252,7 +254,7 @@ export class LogParser {
         case 10:
           this.onBuff(lineSplit);
           break;
-        case 11:
+        case 12:
           this.onCounterattack(lineSplit);
           break;
       }
@@ -488,10 +490,15 @@ export class LogParser {
       logLine.damage = logLine.damage + logLine.currentHp;
     }
 
+    if (logLine.skillId === 0 && logLine.skillEffectId !== 0) {
+        logLine.skillId = logLine.skillEffectId;
+        logLine.skillName = logLine.skillEffect;
+    }
+
     if (!(logLine.skillName in this.game.entities[logLine.name].skills)) {
       this.game.entities[logLine.name].skills[logLine.skillName] = {
         ...createEntitySkill(),
-        ...{ name: logLine.skillName }
+        ...{ id: logLine.skillId, name: logLine.skillName }
       };
     }
 
@@ -629,7 +636,7 @@ export class LogParser {
     }
   }
 
-  // logId = 11
+  // logId = 12
   onCounterattack(lineSplit: string[]) {
     const logLine = new LogLines.LogCounterattack(lineSplit);
 
