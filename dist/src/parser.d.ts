@@ -26,6 +26,7 @@ interface HealSource {
 interface Entity {
     lastUpdate: number;
     id: string;
+    npcId: number;
     name: string;
     class: string;
     classId: number;
