@@ -1,6 +1,6 @@
 /// <reference types="node" />
 /// <reference types="node" />
-import EventEmitter from "events";
+import { EventEmitter } from "events";
 interface Game {
     startedOn: number;
     lastCombatPacket: number;
@@ -28,10 +28,12 @@ interface Entity {
     id: string;
     name: string;
     class: string;
+    classId: number;
     isPlayer: boolean;
     isDead: boolean;
+    deaths: number;
     deathTime: number;
-    gearScore: string;
+    gearScore: number;
     currentHp: number;
     maxHp: number;
     damageDealt: number;
@@ -43,22 +45,31 @@ interface Entity {
     };
     hits: Hits;
 }
+interface Breakdown {
+    timestamp: number;
+    damage: number;
+    targetEntity: string;
+    isCrit: boolean;
+    isBackAttack: boolean;
+    isFrontAttack: boolean;
+}
 interface EntitySkills {
     id: number;
     name: string;
     totalDamage: number;
     maxDamage: number;
     hits: Hits;
+    breakdown: Breakdown[];
 }
 interface Hits {
+    casts: number;
     total: number;
     crit: number;
     backAttack: number;
     frontAttack: number;
     counter: number;
 }
-export declare class LogParser {
-    eventEmitter: EventEmitter;
+export declare class LogParser extends EventEmitter {
     resetTimer: ReturnType<typeof setTimeout>;
     debugLines: boolean;
     isLive: boolean;

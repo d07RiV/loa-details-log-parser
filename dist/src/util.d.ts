@@ -1,1 +1,1 @@
-export declare function tryParseInt(intString: string, defaultValue?: number, radix?: number): number;
+export declare function tryParseInt(intString: string, defaultValue?: number, radix?: number, float?: boolean): number;

@@ -1,11 +1,11 @@
 import dayjs from "dayjs";
-import { LogParser } from "./parser.js";
+import { LogParser } from "./parser";
 import { v4 as uuidv4 } from "uuid";
 
 import fs from "fs";
 import path from "path";
 
-import customParseFormat from "dayjs/plugin/customParseFormat.js";
+import customParseFormat from "dayjs/plugin/customParseFormat";
 dayjs.extend(customParseFormat);
 
 export default function fileParserWorker(

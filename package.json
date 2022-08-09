@@ -16,6 +16,7 @@
     "build": "microbundle src/*.ts"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.182",
     "microbundle": "^0.15.0"
   },
   "dependencies": {
