@@ -1,4 +1,4 @@
-export function tryParseInt(intString: string, defaultValue = 0, radix = 10) {
+export function tryParseInt(intString: string, defaultValue = 0, radix = 10, float = false) {
   if (typeof intString === "number") {
     if (isNaN(intString)) return defaultValue;
     return intString;
@@ -7,7 +7,7 @@ export function tryParseInt(intString: string, defaultValue = 0, radix = 10) {
   let intNum: number;
 
   try {
-    intNum = parseInt(intString, radix);
+    intNum = float ? parseFloat(intString) : parseInt(intString, radix);
     if (isNaN(intNum)) intNum = defaultValue;
   } catch {
     intNum = defaultValue;
