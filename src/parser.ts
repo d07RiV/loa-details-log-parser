@@ -29,6 +29,7 @@ interface HealSource {
 interface Entity {
   lastUpdate: number;
   id: string;
+  npcId: number;
   name: string;
   class: string;
   classId: number;
@@ -96,6 +97,7 @@ function createEntity(): Entity {
   const newEntity: Entity = {
     lastUpdate: 0,
     id: "",
+    npcId: 0,
     name: "",
     class: "",
     classId: 0,
