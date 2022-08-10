@@ -1,4 +1,4 @@
-import { tryParseInt } from "./util.js";
+import { tryParseInt } from "./util";
 
 class LogLine {
   lineSplit: string[];
@@ -49,7 +49,7 @@ export class LogNewPc extends LogLine {
   name: string;
   classId: number;
   class: string;
-  gearScore: string;
+  gearScore: number;
   currentHp: number;
   maxHp: number;
 
@@ -61,7 +61,7 @@ export class LogNewPc extends LogLine {
     this.classId = tryParseInt(lineSplit[4]);
     this.class = lineSplit[5] || "UnknownClass";
     /* this.level = tryParseInt(lineSplit[6]); */
-    this.gearScore = lineSplit[7];
+    this.gearScore = tryParseInt(lineSplit[7], 0, 10, true);
     this.currentHp = tryParseInt(lineSplit[8]);
     this.maxHp = tryParseInt(lineSplit[9]);
   }
@@ -70,6 +70,7 @@ export class LogNewPc extends LogLine {
 // logId = 4
 export class LogNewNpc extends LogLine {
   id: string;
+  npcId: number;
   name: string;
   currentHp: number;
   maxHp: number;
@@ -78,7 +79,7 @@ export class LogNewNpc extends LogLine {
     super(lineSplit);
 
     this.id = lineSplit[2];
-    //this.npcId = tryParseInt(lineSplit[3]);
+    this.npcId = tryParseInt(lineSplit[3]);
     this.name = lineSplit[4] || "Unknown Entity";
     this.currentHp = tryParseInt(lineSplit[5]);
     this.maxHp = tryParseInt(lineSplit[6]);
@@ -106,7 +107,7 @@ export class LogDeath extends LogLine {
 export class LogSkillStart extends LogLine {
   id: string;
   name: string;
-  skillId: string;
+  skillId: number;
   skillName: string;
 
   constructor(lineSplit: string[]) {
@@ -114,7 +115,7 @@ export class LogSkillStart extends LogLine {
 
     this.id = lineSplit[2];
     this.name = lineSplit[3] || "Unknown Entity";
-    this.skillId = lineSplit[4];
+    this.skillId = tryParseInt(lineSplit[4]);
     this.skillName = lineSplit[5] || "Unknown Skill";
   }
 }

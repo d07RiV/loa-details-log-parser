@@ -20,13 +20,14 @@ export declare class LogNewPc extends LogLine {
     name: string;
     classId: number;
     class: string;
-    gearScore: string;
+    gearScore: number;
     currentHp: number;
     maxHp: number;
     constructor(lineSplit: string[]);
 }
 export declare class LogNewNpc extends LogLine {
     id: string;
+    npcId: number;
     name: string;
     currentHp: number;
     maxHp: number;
@@ -42,7 +43,7 @@ export declare class LogDeath extends LogLine {
 export declare class LogSkillStart extends LogLine {
     id: string;
     name: string;
-    skillId: string;
+    skillId: number;
     skillName: string;
     constructor(lineSplit: string[]);
 }
