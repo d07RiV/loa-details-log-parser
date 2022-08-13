@@ -1,6 +1,5 @@
 {
-  "name": "loa-details-log-parser",
-  "version": "1.1.0",
+  "name": "loa-de21.0",
   "description": "Log parser made for LOA Details",
   "exports": {
     ".": "./dist/parser.js",
