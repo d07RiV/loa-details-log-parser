@@ -206,6 +206,7 @@ export class LogParser extends EventEmitter {
 
       this.updateEntity(entitiesCopy[entity].name, {
         name: entitiesCopy[entity].name,
+        npcId: entitiesCopy[entity].npcId,
         class: entitiesCopy[entity].class,
         classId: entitiesCopy[entity].classId,
         isPlayer: entitiesCopy[entity].isPlayer,
