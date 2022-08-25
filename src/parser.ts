@@ -266,8 +266,12 @@ export class LogParser {
   }
 
   updateEntity(entityName: string, values) {
-    const updateTime = { lastUpdate: +new Date() };
-    if (!(entityName in this.game.entities)) {
+    const updateTime = {};
+    const prev = this.game.entities[entityName];
+    if (values.currentHp && (!prev || values.currentHp !== prev.currentHp)) {
+      updateTime.lastUpdate = +new Date();
+    }
+    if (!prev) {
       this.game.entities[entityName] = {
         ...createEntity(),
         ...values,
@@ -275,7 +279,7 @@ export class LogParser {
       };
     } else {
       this.game.entities[entityName] = {
-        ...this.game.entities[entityName],
+        ...prev,
         ...values,
         ...updateTime
       };
